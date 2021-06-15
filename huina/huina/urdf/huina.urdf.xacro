@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="huina" xmlns:xacro="http://ros.org/wiki/xacro">
+   
+   <xacro:include filename="$(find huina)/urdf/huina.gazebo" />
+
+    <link name="base_link">
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="car_body"/>
+        <origin xyz="0.0 0 0.09" rpy="0 0 0"/>
+
+    </joint>
+   
+    <link name="car_body">
+        
+<inertial>
+            <origin xyz="0.0277036815852469 -0.00448633462860135 -0.0849680860031838" rpy="0 0 0" />
+            <mass value="0.588422576644468" />
+            <inertia ixx="0.1" ixy="-8.76238916355358E-17" ixz="-1.19296623982282E-05" iyy="0.1" iyz="4.01026179745227E-18" izz="0.1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/car_body.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/car_body.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="base">
+        
+<inertial>
+            <origin xyz="-0.0516578618406733 0.00730392376929956 -0.0106979824392101" rpy="0 0 0" />
+            <mass value="1.96019666506883" />
+            <inertia ixx="0.1" ixy="-0.00106904041983792" ixz="-0.000329653626868119" iyy="0.1" iyz="-0.00046062303413282" izz="0.1" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/base.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/base.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="base" type="revolute">
+        <origin xyz="0.03319766986659 -0.00448633462860348 0" rpy="0 0 -0.0437181825672099" />
+        <parent link="car_body" />
+        <child link="base" />
+        <axis xyz="0 0 1" />
+        <limit lower="-3.14" upper="3.14" effort="10" velocity="300" />
+    </joint>
+    <link name="boom">
+        
+<inertial>
+            <origin xyz="0.120439212469446 -0.0065000000000165 0.063340673199285" rpy="0 0 0" />
+            <mass value="0.346577116035154" />
+            <inertia ixx="0.000324111767708899" ixy="2.98306369298125E-16" ixz="-0.000595793208342359" iyy="0.00229961062751601" iyz="8.44322441823087E-17" izz="0.00203231488392336" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/boom.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/boom.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="boom" type="revolute">
+        <origin xyz="0.0130627142341879 0 0.00372992616434019" rpy="0 -0.361002570672547 0" />
+        <parent link="base" />
+        <child link="boom" />
+        <axis xyz="0 1 0" />
+        <limit lower="-1.04"
+      upper="1.04"
+      effort="10"
+      velocity="300" />
+    </joint>
+    <link name="stick">
+        
+<inertial>
+            <origin xyz="0.0112597216830215 -0.00749999999999149 -0.0452657830637142" rpy="0 0 0" />
+            <mass value="0.185038629256696" />
+            <inertia ixx="0.000508600419330306" ixy="4.79251241556483E-18" ixz="-5.53041462385249E-05" iyy="0.000522620275006081" iyz="5.43386458740211E-17" izz="3.99311814760734E-05" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/stick.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/stick.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="stick" type="revolute">
+        <origin xyz="0.287517822311501 0 0.0832232265493627" rpy="0 -0.261894013736616 0" />
+        <parent link="boom" />
+        <child link="stick" />
+        <axis xyz="0 1 0" />
+        <limit lower="-1.04"
+      upper="0.41"
+      effort="10"
+      velocity="300" />
+    </joint>
+    <link name="bucket">
+        
+<inertial>
+            <origin xyz="0.0506872800188194 -0.00749996910372607 -0.0103385762594749" rpy="0 0 0" />
+            <mass value="0.0377327080940099" />
+            <inertia ixx="6.52836855504669E-05" ixy="6.81676753113585E-11" ixz="8.46358419802204E-06" iyy="4.44464378991745E-05" iyz="1.0024609402386E-10" izz="5.17421678228667E-05" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/bucket.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/bucket.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="bucket" type="revolute">
+        <origin xyz="-0.00100000000000006 0 -0.1545" rpy="0 0.820840910158624 0" />
+        <parent link="stick" />
+        <child link="bucket" />
+        <axis xyz="0 1 0" />
+        <limit lower="-0.8"
+      upper="2.61"
+      effort="10"
+      velocity="300" />
+    </joint>
+    <link name="eef">
+        
+<inertial>
+            <origin xyz="-3.46944695195361E-18 -5.55111512312578E-17 4.99999999999667E-05" rpy="0 0 0" />
+            <mass value="9.99999999999929E-10" />
+            <inertia ixx="1.66666666666617E-18" ixy="-9.44066784614318E-32" ixz="-8.63990228645343E-32" iyy="1.6666666666665E-18" iyz="-2.45932226101636E-33" izz="1.66666666666634E-18" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/eef.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/eef.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="eef" type="fixed">
+        <origin xyz="0.0546901069661451 -0.00750000000001709 -0.0753462722079562" rpy="0 0 0" />
+        <parent link="bucket" />
+        <child link="eef" />
+        <axis xyz="0 0 0" />
+    </joint>
+    <link name="left_rear">
+        
+<inertial>
+            <origin xyz="1.38777878078145E-17 0.0101730561555077 8.32667268468867E-17" rpy="0 0 0" />
+            <mass value="0.0349093775666898" />
+            <inertia ixx="6.96072266110404E-06" ixy="-1.11134583990572E-38" ixz="9.90352161931369E-38" iyy="1.15634085203208E-05" iyz="3.1122916146822E-20" izz="6.96072266110405E-06" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_rear.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_rear.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="left_rear" type="continuous">
+        <origin xyz="-0.0803023301334109 0.0540136653713965 -0.0892049098984649" rpy="0 0 0" />
+        <parent link="car_body" />
+        <child link="left_rear" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="left_1">
+        
+<inertial>
+            <origin xyz="0 0.0108732532809099 6.93889390390723E-17" rpy="0 0 0" />
+            <mass value="0.0739098941665168" />
+            <inertia ixx="2.87221330625165E-05" ixy="2.06629866355479E-37" ixz="2.2160398176307E-37" iyy="5.15828136163184E-05" iyz="1.56515664075405E-19" izz="2.87221330625165E-05" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_1.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_1.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="left_1" type="continuous">
+        <origin xyz="-0.00555233013341085 0.0540136653713964 -0.0892049098984649" rpy="0 0 0" />
+        <parent link="car_body" />
+        <child link="left_1" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="left_2">
+        
+<inertial>
+            <origin xyz="0 0.0108732532809099 6.93889390390723E-17" rpy="0 0 0" />
+            <mass value="0.0739098941665168" />
+            <inertia ixx="2.87221330625165E-05" ixy="-9.05473700315616E-39" ixz="2.473064231122E-37" iyy="5.15828136163184E-05" iyz="1.56515664075404E-19" izz="2.87221330625165E-05" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_2.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_2.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="left_2" type="continuous">
+        <origin xyz="0.0744476698665892 0.0540136653713964 -0.0892049098984649" rpy="0 0 0" />
+        <parent link="car_body" />
+        <child link="left_2" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="left_3">
+        
+<inertial>
+            <origin xyz="-2.77555756156289E-17 0.0101730561555077 8.32667268468867E-17" rpy="0 0 0" />
+            <mass value="0.0349093775666898" />
+            <inertia ixx="6.96072266110404E-06" ixy="-1.11134583990572E-38" ixz="9.90352161931369E-38" iyy="1.15634085203208E-05" iyz="3.1122916146822E-20" izz="6.96072266110405E-06" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_3.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/left_3.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="left_3" type="continuous">
+        <origin xyz="0.149197669866589 0.0540136653713965 -0.0892049098984649" rpy="0 0 0" />
+        <parent link="car_body" />
+        <child link="left_3" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="right_rear">
+        
+<inertial>
+            <origin xyz="1.38777878078145E-17 -0.0101730561555075 1.38777878078145E-17" rpy="0 0 0" />
+            <mass value="0.0349093775666898" />
+            <inertia ixx="6.96072266110407E-06" ixy="1.11134583990565E-38" ixz="-9.90352161931368E-38" iyy="1.15634085203208E-05" iyz="-8.14632703297257E-22" izz="6.96072266110408E-06" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_rear.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_rear.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="right_rear" type="continuous">
+        <origin xyz="-0.0803023301334108 -0.0629863346286033 -0.0892049098984649" rpy="0 0 0" />
+        <parent link="car_body" />
+        <child link="right_rear" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="right_1">
+        
+<inertial>
+            <origin xyz="0 -0.0108732532809096 0" rpy="0 0 0" />
+            <mass value="0.0739098941665168" />
+            <inertia ixx="2.87221330625165E-05" ixy="9.05473700315438E-39" ixz="-2.473064231122E-37" iyy="5.15828136163183E-05" iyz="-1.49101536388842E-21" izz="2.87221330625165E-05" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_1.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_1.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="right_1" type="continuous">
+        <origin xyz="-0.00555233013341085 -0.0629863346286033 -0.0892049098984649" rpy="0 0 0" />
+        <parent link="car_body" />
+        <child link="right_1" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="right_2">
+        
+<inertial>
+            <origin xyz="0 -0.010873 0" rpy="0 0 0" />
+            <mass value="0.07391" />
+            <inertia ixx="2.8722E-05" ixy="-3.5761E-21" ixz="1.6941E-21" iyy="5.1583E-05" iyz="-1.9395E-21" izz="2.8722E-05" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_2.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_2.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="right_2" type="continuous">
+        <origin xyz="0.0744476698665892 -0.0629863346286033 -0.0892049098984649" rpy="-3.14159265358979 -1.02948924380112 3.14159265358979" />
+        <parent link="car_body" />
+        <child link="right_2" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <link name="right_3">
+        
+<inertial>
+            <origin xyz="-2.7756E-17 -0.010173 1.3878E-17" rpy="0 0 0" />
+            <mass value="0.034909" />
+            <inertia ixx="6.9607E-06" ixy="-1.4108E-24" ixz="5.294E-23" iyy="1.1563E-05" iyz="-1.353E-21" izz="6.9607E-06" />
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_3.STL" />
+            </geometry>
+            <material name="">
+                <color rgba="0.79216 0.81961 0.93333 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://huina/meshes/right_3.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="right_3" type="continuous">
+        <origin xyz="0.1492 -0.062986 -0.089205" rpy="0 0.043635 0" />
+        <parent link="car_body" />
+        <child link="right_3" />
+        <axis xyz="0 1 0" />
+    </joint>
+    
+<transmission name="trans_base">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="base">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="base_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_boom">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="boom">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="boom_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_stick">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="stick">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="stick_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_bucket">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="bucket">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="bucket_motor">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_left_rear">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_rear">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_rear_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_left_1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_1">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_1_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_left_2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_2">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_2_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_left_3">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_3">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_3_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_right_rear">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_rear">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_rear_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_right_1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_1">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_1_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_right_2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_2">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_2_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <transmission name="trans_right_3">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_3">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_3_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+    </transmission>
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+
+      <link name="sensor_laser">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.01 0.01 0.01"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <!--<mesh filename="package://mybot_description/meshes/hokuyo.dae"/> -->
+         <cylinder radius="0.005" length="0.01"/>
+      </geometry>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="laser_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.12 0 -0.06" rpy="0 0 0"/>
+    <parent link="car_body"/>
+    <child link="sensor_laser"/>
+  </joint>
+
+    <link name="imu_link"/>
+    <joint name="imu_joint" type="fixed">
+      <origin xyz="0.0 0 0.0" rpy="0 0 0" />
+      <parent link="car_body" />
+      <child link="imu_link" />
+    </joint>
+    <gazebo reference="imu_link">
+    </gazebo>
+
+    <link name="gps_link"/>
+    <joint name="gps_joint" type="fixed">
+      <origin xyz="0.0 0 0.0" rpy="0 0 0" />
+      <parent link="car_body" />
+      <child link="gps_link" />
+    </joint>
+    <gazebo reference="gps_link">
+    </gazebo>
+
+</robot>

@@ -1,0 +1,6 @@
+<robot file="huina.dae">
+    <Manipulator name="huina.urdf">
+        <base>base</base>
+        <effector>bucket</effector>
+    </Manipulator>
+</robot>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<launch>
+  <master auto="start"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find huina)/urdf/huina.urdf.xacro'"/>
+
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(find huina_navigation)/maps/smart3map.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!-- Place map frame at odometry frame 
+   <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="0 0 0 0 0 0 map odom 100"/> -->
+
+  <!-- Localization 
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <remap from="scan" to="smart/laser/scan"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="odom_model_type" value="diff-corrected"/>
+    <param name="base_frame_id" value="chassis"/>
+    <param name="update_min_d" value="0.5"/>
+    <param name="update_min_a" value="1.0"/>
+  </node> -->
+  <!--include file="$(find amcl)/examples/amcl_diff.launch"/-->
+
+
+
+  <!-- Move base -->
+  <node name="move_base_flex" pkg="mbf_costmap_nav" type="mbf_costmap_nav" required="true" output="screen">
+    <rosparam file="$(find huina_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find huina_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find huina_navigation)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find huina_navigation)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find huina_navigation)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find huina_navigation)/config/mbf/controllers.yaml" command="load" />
+    <remap from="cmd_vel" to="velocity_controller/cmd_vel"/>
+  </node>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find huina_navigation)rviz/nav_mild.rviz"/>
+
+
+  <!--<node name="demo" pkg="control" type="nd.py" output="screen" /> -->
+
+
+</launch>
+
+

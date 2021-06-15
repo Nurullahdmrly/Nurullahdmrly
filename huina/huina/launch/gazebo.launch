@@ -1,0 +1,50 @@
+<launch>
+<!-- <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 -0.1 0 0 0 1 car_body base_link 100" />
+  -->
+  <include file="$(find huina)/launch/ekf_navsat.launch">
+  </include> 
+
+  <arg name="world" default="empty"/> 
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!--<arg name="world_name" value="$(find smart_urdf)/worlds/barrel1.world"/>
+     arg name="world_name" value="$(find mybot_gazebo)/worlds/turtlebot_playground.world"/> -->
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+
+ <param name="robot_description" command="$(find xacro)/xacro.py '$(find huina)/urdf/huina.urdf.xacro'"/>
+
+  <node name="smart_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+   args="-urdf -param robot_description -model huina -x 0 -y 0 -z 0.1 " />
+
+  <!--<node name="spawn_model" pkg="gazebo_ros" type="spawn_model" args="-file $(find smart_urdf)/urdf/smart_urdf.urdf -urdf -model smart_urdf" output="screen" /> -->
+  <rosparam file="$(find huina)/config/velocity_controller.yaml" command="load"/>
+  <node name="controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn velocity_controller" respawn="false" output="screen"/>
+
+  <rosparam file="$(find huina)/config/joint_state_controller.yaml" command="load"/>
+  <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/>
+   <!--start this controller--> 
+  <rosparam file="$(find huina)/config/arm_controller.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+
+  <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="load joint_group_position_controller" />
+
+
+  <node name="fake_joint_calibration" pkg="rostopic" type="rostopic" args="pub /calibrated std_msgs/Bool true" />
+
+</launch>
